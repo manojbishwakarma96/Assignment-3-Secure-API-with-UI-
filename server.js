@@ -10,18 +10,22 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 
+// Middleware
+app.use(express.json());
+
 // MongoDB Connection
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// Basic middleware
-app.use(express.json());
+// Routes
+const recipeRoutes = require("./routes/recipeRoutes");
+app.use("/api/recipes", recipeRoutes);
 
-// Test route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Recipe API" });
+// Error handling for undefined routes
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
 });
 
 const PORT = process.env.PORT || 3000;

@@ -7,21 +7,12 @@
 
 const express = require("express");
 const router = express.Router();
-const {
-  getAllRecipes,
-  getRecipeById,
-} = require("../controllers/recipeController");
+const { getAllRecipes } = require("../controllers/recipeController");
 
 /**
- * @route GET /api/recipes
+ * @route GET /api/recipes/getAllRecipes
  * @description Get all recipes
  */
-router.get("/", getAllRecipes);
-
-/**
- * @route GET /api/recipes/:id
- * @description Get a single recipe by ID
- */
-router.get("/:id", getRecipeById);
+router.get("/getAllRecipes", getAllRecipes);
 
 module.exports = router;
