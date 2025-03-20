@@ -7,20 +7,21 @@
 
 const express = require("express");
 const router = express.Router();
-const Recipe = require("../models/recipeModel");
+const {
+  getAllRecipes,
+  getRecipeById,
+} = require("../controllers/recipeController");
 
 /**
  * @route GET /api/recipes
  * @description Get all recipes
- * @returns {Array} Array of recipes
  */
-router.get("/", async (req, res) => {
-  try {
-    const recipes = await Recipe.find();
-    res.status(200).json(recipes);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+router.get("/", getAllRecipes);
+
+/**
+ * @route GET /api/recipes/:id
+ * @description Get a single recipe by ID
+ */
+router.get("/:id", getRecipeById);
 
 module.exports = router;
