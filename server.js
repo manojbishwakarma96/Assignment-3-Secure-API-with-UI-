@@ -5,15 +5,14 @@
  * Date: March 20, 2024
  */
 
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 
 // MongoDB Connection
 mongoose
-  .connect(
-    "mongodb+srv://manojbishwakarma88:manoj123@recipesdatabase.iogvl.mongodb.net/recipes_db"
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -25,7 +24,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Recipe API" });
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
