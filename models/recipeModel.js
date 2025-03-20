@@ -55,5 +55,5 @@ const recipeSchema = new mongoose.Schema(
   }
 );
 
-// Export the model with the name 'recipeModel'
-module.exports = mongoose.model("recipeModel", recipeSchema);
+// Using 'recipes' as the collection name in RecipesDB database
+module.exports = mongoose.model("Recipe", recipeSchema, "recipes");
